@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sys
 from distutils.core import setup
 
@@ -8,15 +7,15 @@ DOWNLOAD_URL = '##DOWNLOAD_URL##'
 requirements = []
 tests_require = ['unittest2', 'tox', 'coverage']
 
-if sys.version_info[0:2] != (2, 7):
-    print('You need to run this with Python 2.7', file=sys.stderr)
+if sys.version_info[0] != 3:
+    print('You need to run this with Python 3.X', file=sys.stderr)
 
 setup(
     name='##PROJECT##',
     version=VERSION,
-    description='Project description',
+    description='Panadero',
     author=AUTHOR,
-    author_email='email',
+    author_email='kabute@kabute.org',
     url=DOWNLOAD_URL,
     download_url=DOWNLOAD_URL,
     license='MIT',
@@ -31,9 +30,8 @@ setup(
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2 :: Only',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
         'Intended Audience :: System Administrators',
         'Topic :: Communications',
         'Topic :: Utilities'

@@ -22,7 +22,7 @@ function create_skel_base(){
 function create_skel_module(){
     cp ./skel/module/__init__.py $1/$2
     cp ./skel/module/basic_class.py $1/$2/$2.py
-    cp ./skel/module/compat.py $1/$2
+    # cp ./skel/module/compat.py $1/$2
 
 }
 function create_skel_test(){

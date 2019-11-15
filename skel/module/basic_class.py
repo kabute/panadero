@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-
 class ##PROJECT##(object):
     __slots__ = ["_msg"]
 

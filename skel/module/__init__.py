@@ -1,8 +1,6 @@
-from __future__ import print_function
-
-from compat import ##PROJECT##
+from ##PROJECT##.##PROJECT## import ##PROJECT##
 
 
 def main():
-    obj = ##PROJECT##.##PROJECT##()
+    obj = ##PROJECT##()
     obj.##PROJECT##()
