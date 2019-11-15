@@ -9,4 +9,4 @@ class Test##PROJECT##(unittest.TestCase):
         self._obj = ##PROJECT##()
 
     def test_##PROJECT##(self):
-        self._obj.##PROJECT##()
+        self._obj.##PROJECT##('Bastian')
