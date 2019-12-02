@@ -14,7 +14,7 @@ function check_path(){
     path_exist=0
 
     if [ -d "${path}" ];then
-        let path_exist=1
+        (( path_exist=1 ))
     fi
 
     echo ${path_exist}
@@ -59,7 +59,7 @@ if [ $# -ne 2 ];then
     exit 1
 fi
 
-if [ $(check_path "$1") -eq 1 ];then
+if [ "$(check_path "$1")" -eq 1 ];then
     this_path=$(pwd)
     project_path=${1}/${2}/src
 
@@ -80,6 +80,9 @@ if [ $(check_path "$1") -eq 1 ];then
         echo " "
         echo " "
         cd "${project_path}" || exit
+
+        # This script belongs to virtualenv, not testing
+        # shellcheck disable=SC1091
         source ../bin/activate
         pip install -e .
         ${2}

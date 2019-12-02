@@ -1,3 +1,4 @@
+![Tests Status](https://github.com/kabute/panadero/workflows/Panadero%20Tests/badge.svg)
 # Panaderno Chema
 Panadero Chema is a opinionated and simplistic Python project creation tool that guarantees that you have a defined structure (and testing!).
 
