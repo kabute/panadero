@@ -1,0 +1,12 @@
+name: Panadero Tests
+
+on: push
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Shellcheck
+      uses: ludeeus/action-shellcheck@master
