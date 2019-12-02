@@ -1,10 +1,19 @@
 #!/bin/bash
 
+SED="sed"
+FIND="find"
+
+# OSX require GNU sed and find
+if [[ "$OSTYPE" == "darwin*" ]]; then
+  SED="gsed"
+  FIND="gfind"
+fi
+
 function check_path(){
     path=$1
     path_exist=0
 
-    if [ -d ${path} ];then
+    if [ -d "${path}" ];then
         let path_exist=1
     fi
 
@@ -14,35 +23,34 @@ function check_path(){
 
 # Copy base files of project and prepare them
 function create_skel_base(){
-    cp ./skel/base/* $1
+    cp ./skel/base/* "$1"
 
 }
 
 # Create a really basic module
 function create_skel_module(){
-    cp ./skel/module/__init__.py $1/$2
-    cp ./skel/module/basic_class.py $1/$2/$2.py
-    #cp ./skel/module/compat.py $1/$2
+    cp ./skel/module/__init__.py "$1"/"$2"
+    cp ./skel/module/basic_class.py "$1"/"$2"/"$2".py
 
 }
 function create_skel_test(){
-    cp ./skel/tests/tox/* $1
+    cp ./skel/tests/tox/* "$1"
 
-    mkdir $1/tests
-    cp ./skel/tests/tests/* $1/tests
+    mkdir "$1"/tests
+    cp ./skel/tests/tests/* "$1"/tests
 
 }
 
 function parse_templates(){
-    for file in $(find $1 -type f );do
-        sed -i -e "s/##PROJECT##/$2/g" $file
+    for file in $($FIND "$1" -type f );do
+        $SED -i -e "s/##PROJECT##/$2/g" "$file"
     done
 }
 
 function create_virtualenv(){
-    cd $1
+    cd "$1" || exit
     virtualenv .
-    cd -
+    cd - || exit
 }
 
 if [ $# -ne 2 ];then
@@ -51,37 +59,37 @@ if [ $# -ne 2 ];then
     exit 1
 fi
 
-if [ $(check_path $1) -eq 1 ];then
+if [ $(check_path "$1") -eq 1 ];then
     this_path=$(pwd)
     project_path=${1}/${2}/src
 
-    if [ ! -d ${project_path} ];then
+    if [ ! -d "${project_path}" ];then
         # Needed directories for project can be created
-        mkdir -p ${project_path}
-        mkdir -p ${project_path}/${2}
+        mkdir -p "${project_path}"
+        mkdir -p "${project_path}"/"${2}"
 
-        create_virtualenv ${1}/${2}
-        create_skel_base ${project_path} ${2}
-        create_skel_module ${project_path} ${2}
-        create_skel_test ${project_path} ${2}
+        create_virtualenv "${1}"/"${2}"
+        create_skel_base "${project_path}" "${2}"
+        create_skel_module "${project_path}" "${2}"
+        create_skel_test "${project_path}" "${2}"
 
-        parse_templates ${project_path} ${2}
+        parse_templates "${project_path}" "${2}"
 
         # Enable virtualenv and build and run project
         echo " >> BUILDING AND RUNNING PACKAGE:"
         echo " "
         echo " "
-        cd ${project_path}
+        cd "${project_path}" || exit
         source ../bin/activate
         pip install -e .
         ${2}
         echo " "
         echo " "
 
-	cd ${project_path}
+	cd "${project_path}" || exit
 	tox
 
-	cd ${this_path}
+	cd "${this_path}" || exit
 
 	echo " "
 	echo ">> Your new project is ready on ${project_path}/${2}"

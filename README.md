@@ -1,5 +1,5 @@
 # Panaderno Chema
-Panadero Chema is a simplistic Python project creation tool that guarantees that you have a defined structure (and testing!).
+Panadero Chema is a opinionated and simplistic Python project creation tool that guarantees that you have a defined structure (and testing!).
 
 There are many Python Cookie cutters... but this is mine ¯\\_(ツ)_/¯  
 
@@ -10,7 +10,7 @@ pip install virtualenv
 ```
 
 ## Scaffolding a new project
-The main binary (well 'binary') is 'amasa' and works this way:
+The main script  is 'amasa' and works this way:
 
 ```bash
 # Generic Syntax
@@ -23,7 +23,7 @@ The main binary (well 'binary') is 'amasa' and works this way:
 # Projet now lives on $HOME/Projects/harina
 ```
 
-**Note:** _amasa-osx_ requires OSX to have gnu utils (gsed and gfind).
+**Note:** OSX requires gnu utils (gsed and gfind).
 ```bash
 brew install gnu-sed
 brew install gnu-find
